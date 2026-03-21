@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CraftMint - Indian Arts & Handicrafts</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- OrbitControls for Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body class="light-mode">
+  
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fa-solid fa-palette"></i> CraftMint
+      </div>
+      
+      <div class="nav-menu">
+        <div class="search-bar">
+          <input type="text" placeholder="Search crafts, artists, styles...">
+          <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        
+        <div class="nav-links">
+          <a href="#" class="active" onclick="showSection('home')">Home</a>
+          <a href="#" onclick="showSection('shop')">Shop</a>
+          <a href="#" onclick="showSection('opportunities')">Work Ops</a>
+          <a href="#" onclick="showSection('tourism')">Tourism</a>
+          <a href="#" onclick="showSection('verify-authenticity')" class="nav-highlight"><i class="fa-solid fa-shield-halved"></i> Verify</a>
+          <a href="#" onclick="toggleHelpChat()"><i class="fa-solid fa-headset"></i> Support</a>
+          <a href="#" onclick="showSection('dashboard')">Sell/Register</a>
+        </div>
+
+        <div class="nav-actions">
+          <select id="lang-switch" class="lang-select" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="or">ଓଡ଼ିଆ (Odia)</option>
+          </select>
+          <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+          <button class="icon-btn" onclick="toggleWishlist()" aria-label="Wishlist"><i class="fa-solid fa-heart"></i><span id="wishlist-badge" class="badge">0</span></button>
+          <button class="icon-btn" onclick="toggleCart()" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge">0</span></button>
+          <button id="login-nav-btn" class="btn-primary" onclick="toggleAuthModal()">Login</button>
+        </div>
+      </div>
+      <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="toggleAuthModal()">&times;</span>
+      <h2>Login / Register</h2>
+      <div class="auth-tabs">
+        <button class="tab active" onclick="switchAuthTab('login')">Login</button>
+        <button class="tab" onclick="switchAuthTab('register')">Register</button>
+      </div>
+      <form id="auth-form" onsubmit="handleAuth(event)">
+        <input type="email" id="auth-email" placeholder="Email" required>
+        <input type="password" id="auth-password" placeholder="Password" required>
+        <div id="register-fields" style="display:none;">
+          <input type="text" id="auth-name" placeholder="Full Name">
+          <select id="auth-role">
+            <option value="buyer">I am a Buyer</option>
+            <option value="seller">I want to Sell (Artisan)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary full-width">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <main id="main-content">
+    
+    <!-- Home Section -->
+    <section id="home-section" class="view-section active">
+      <div class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content reveal-left">
+          <div class="brand-tag">Odisha SkillCraft</div>
+          <h1>Empowering <span class="highlight">Heritage</span> & Artisans</h1>
+          <p>Connecting Odisha's master craftsmen with global opportunities. Discover authentic treasures, book immersive workshops, and revive ancient traditions.</p>
+          <div class="hero-btns">
+            <button class="btn-primary large" onclick="showSection('shop')">Explore Collections</button>
+            <button class="btn-secondary large" onclick="showSection('opportunities')">Hire an Artisan</button>
+          </div>
+        </div>
+        <div class="hero-image reveal-right">
+          <div class="decorative-blob"></div>
+          <div class="hero-img-wrapper">
+             <img src="images/hero-bg.png" alt="Traditional Indian Artisan">
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div class="categories container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-grid">
+          <div class="category-card" onclick="showSection('shop')">
+            <div class="cat-icon"><i class="fa-solid fa-paintbrush"></i></div>
+            <h3>Paintings</h3>
+            <p>Madhubani, Warli, Pichwai...</p>
+          </div>
+          <div class="category-card" onclick="showSection('shop')">
+            <div class="cat-icon"><i class="fa-solid fa-jar"></i></div>
+            <h3>Terracotta</h3>
+            <p>Pottery & Sculptures</p>
+          </div>
+          <div class="category-card" onclick="showSection('shop')">
+            <div class="cat-icon"><i class="fa-solid fa-gem"></i></div>
+            <h3>Jewelry</h3>
+            <p>Traditional & Tribal</p>
+          </div>
+          <div class="category-card" onclick="showSection('shop')">
+            <div class="cat-icon"><i class="fa-solid fa-shirt"></i></div>
+            <h3>Textiles</h3>
+            <p>Handloom & Embroidery</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured / Trending -->
+      <div class="featured-products container">
+        <h2 class="section-title">Trending Masterpieces</h2>
+        <div class="filter-tabs">
+          <button class="filter-btn active" onclick="filterHomeProducts('All')">All Categories</button>
+          <button class="filter-btn" onclick="filterHomeProducts('Painting')">Paintings</button>
+          <button class="filter-btn" onclick="filterHomeProducts('Terracotta')">Terracotta</button>
+          <button class="filter-btn" onclick="filterHomeProducts('Jewelry')">Jewelry</button>
+          <button class="filter-btn" onclick="filterHomeProducts('Textiles')">Textiles</button>
+        </div>
+        <div class="product-grid" id="featured-grid">
+            <!-- Dynamic Injection -->
+        </div>
+      </div>
+
+      <!-- Trust & Partners -->
+      <div class="partners-section">
+        <div class="marquee-container">
+          <div class="partner-row">
+            <span>OFFICIAL PARTNER OF:</span>
+            <img src="https://odishatourism.gov.in/content/dam/tourism/site/home/Logo.png" alt="Odisha Tourism">
+            <span class="logo-text">Skill India</span>
+            <span class="logo-text">Handcraft Guild</span>
+            <img src="https://odishatourism.gov.in/content/dam/tourism/site/home/Logo.png" alt="Odisha Tourism">
+            <span class="logo-text">Skill India</span>
+            <span class="logo-text">Handcraft Guild</span>
+          </div>
+          <div class="partner-row">
+            <span>OFFICIAL PARTNER OF:</span>
+            <img src="https://odishatourism.gov.in/content/dam/tourism/site/home/Logo.png" alt="Odisha Tourism">
+            <span class="logo-text">Skill India</span>
+            <span class="logo-text">Handcraft Guild</span>
+            <img src="https://odishatourism.gov.in/content/dam/tourism/site/home/Logo.png" alt="Odisha Tourism">
+            <span class="logo-text">Skill India</span>
+            <span class="logo-text">Handcraft Guild</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- New: Cultural Impact / Testimonials -->
+      <div class="impact-section py-4" style="background: var(--bg-light);">
+        <div class="container text-center">
+          <h2 class="section-title">Impacting Lives</h2>
+          <div class="testimonial-grid">
+            <div class="testimonial-card glass-card">
+              <p>"CraftMint connected my tribal painting to a buyer in Germany. It changed my life."</p>
+              <h4>- Ramesh Kumar</h4>
+              <span>National Awardee Artisan</span>
+            </div>
+            <div class="testimonial-card glass-card">
+              <p>"I finally found authentic Sambalpuri sarees for my boutique without middle-men."</p>
+              <h4>- Anjali Sharma</h4>
+              <span>Boutique Owner, Delhi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D & AI Discovery Section -->
+      <div class="viewer-3d-section container">
+        <div class="viewer-content">
+          <span class="tag-badge">AI Discovery</span>
+          <h2 class="section-title">AI-Driven <span class="highlight">Heritage Revival</span></h2>
+          <p>Our AI identifies rare and disappearing art forms across India. Join our campaign to support these traditions and bring them back to life through modern commerce.</p>
+          <div class="discovery-stats">
+              <div class="stat"><span class="num">120+</span> <p>Hidden Skills Identified</p></div>
+              <div class="stat"><span class="num">45</span> <p>Art Forms Revived</p></div>
+          </div>
+          <button class="btn-primary" onclick="showSection('shop')">Discover Rare Arts</button>
+        </div>
+        <div class="canvas-container" id="sample-3d-container">
+          <!-- ThreeJS Canvas will attach here / AI Visualization -->
+          <div class="ai-scan-effect"></div>
+        </div>
+      </div>
+
+      <!-- Work Opportunities Snapshot -->
+      <div class="opportunities-preview container">
+          <h2 class="section-title">Open Work Opportunities</h2>
+          <div class="ops-grid">
+              <div class="op-card">
+                  <div class="op-header">
+                      <span><i class="fa-solid fa-briefcase"></i> Bulk Order</span>
+                      <span class="price">₹45,000</span>
+                  </div>
+                  <h3>Custom Terracotta Lamps (100 units)</h3>
+                  <p>A heritage hotel in Bhubaneswar is looking for custom designs.</p>
+                  <button class="btn-link" onclick="showSection('opportunities')">View & Apply</button>
+              </div>
+              <div class="op-card featured">
+                  <div class="op-header">
+                      <span><i class="fa-solid fa-graduation-cap"></i> Workshop Mentor</span>
+                      <span class="price">₹12,000 / day</span>
+                  </div>
+                  <h3>Mithila Art Mentor Needed</h3>
+                  <p>Lead a 3-day workshop for international design students.</p>
+                  <button class="btn-link" onclick="showSection('opportunities')">View & Apply</button>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Work Opportunities Section -->
+    <section id="opportunities-section" class="view-section">
+      <div class="container py-4">
+        <h2 class="section-title">Artisan Opportunity Portal</h2>
+        <div class="ops-layout">
+          <aside class="ops-filters card">
+            <h3>Type</h3>
+            <label><input type="checkbox" checked> Bulk Orders</label>
+            <label><input type="checkbox" checked> Corporate Gifting</label>
+            <label><input type="checkbox" checked> Teaching / Mentorship</label>
+            <label><input type="checkbox" checked> Restoration Projects</label>
+            <button class="btn-primary mt-1 full-width">Post an Opportunity</button>
+          </aside>
+          <div class="ops-list">
+            <div class="op-item card">
+                <div class="op-main">
+                    <h3>Hotel Heritage Interior - Odisha Paintings</h3>
+                    <p>Seeking Pattachitra artists for a mural project. Materials provided.</p>
+                    <div class="op-tags">
+                        <span>Odisha</span> <span>Heritage Project</span> <span>₹2 Lakhs Pool</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="alert('Applications received: 12. Register as Artisan to apply.')">Apply Now</button>
+            </div>
+            <div class="op-item card">
+                <div class="op-main">
+                    <h3>Applique Work for Global Fashion Brand</h3>
+                    <p>Collaborative project for the upcoming summer collection.</p>
+                    <div class="op-tags">
+                        <span>Textiles</span> <span>Global Scale</span> <span>Negotiable Price</span>
+                    </div>
+                </div>
+                <button class="btn-primary">Apply Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artisanal Tourism Section -->
+    <section id="tourism-section" class="view-section">
+      <div class="hero-small" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/artisan-cover.png'); background-size: cover; color: white;">
+        <div class="container py-4">
+          <h1>Experience the <span class="highlight">Heart of Craft</span></h1>
+          <p>Book immersive workshops, village art tours, and stay with master artisans.</p>
+        </div>
+      </div>
+      <div class="container mt-4">
+        <h2 class="section-title">Curated Experiences</h2>
+        <div class="tourism-grid">
+           <div class="experience-card card">
+              <img src="images/pots.jpg" alt="Village Tour">
+              <div class="p-3">
+                <span class="loc"><i class="fa-solid fa-location-dot"></i> Raghurajpur, Odisha</span>
+                <h3>Raghurajpur Heritage Walk</h3>
+                <p>Spend a day with Pattachitra artists in their home workshops. Includes lunch.</p>
+                <div class="card-footer">
+                   <span class="price">₹1,500 / person</span>
+                   <button class="btn-primary">Book Now</button>
+                </div>
+              </div>
+           </div>
+           <div class="experience-card card">
+              <img src="images/jewelry.jpg" alt="Jewelry Workshop">
+              <div class="p-3">
+                <span class="loc"><i class="fa-solid fa-location-dot"></i> Cuttack, Odisha</span>
+                <h3>Silver Filigree (Tarakasi) Masterclass</h3>
+                <p>3-day intensive workshop with a national awardee artisan.</p>
+                <div class="card-footer">
+                   <span class="price">₹8,000 / person</span>
+                   <button class="btn-primary">Book Now</button>
+                </div>
+              </div>
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shop / E-Commerce Section -->
+    <section id="shop-section" class="view-section">
+      <div class="container">
+        <div style="margin-bottom: 20px;">
+           <button class="btn-secondary" onclick="showSection('home')"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+        </div>
+        <div class="shop-layout">
+        <aside class="shop-sidebar">
+          <h3>Filters</h3>
+          <div class="filter-group">
+            <h4>Category</h4>
+            <label><input type="radio" name="catFilter" value="All" checked onchange="filterShop()"> All Categories</label>
+            <label><input type="radio" name="catFilter" value="painting|art" onchange="filterShop()"> Paintings & Art</label>
+            <label><input type="radio" name="catFilter" value="jewelry" onchange="filterShop()"> Jewelry</label>
+            <label><input type="radio" name="catFilter" value="terracotta|clay|item" onchange="filterShop()"> Terracotta & Crafts</label>
+            <label><input type="radio" name="catFilter" value="textile|handloom" onchange="filterShop()"> Textiles</label>
+          </div>
+          <div class="filter-group">
+            <h4>Max Price Range</h4>
+            <input type="range" id="price-filter" min="10" max="1000" value="1000" class="price-slider" oninput="updatePriceLabel(); filterShop()">
+            <p>Up to ₹<span id="price-label">1000</span></p>
+          </div>
+        </aside>
+        
+        <div class="shop-main">
+          <h2 class="section-title">All Artworks</h2>
+          <div class="product-grid" id="shop-grid">
+            <!-- Products Loaded Here via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Product Detail & 3D Viewer View -->
+    <section id="product-detail-section" class="view-section">
+      <div class="container product-detail">
+        <button class="btn-secondary" onclick="showSection('shop')"><i class="fa-solid fa-arrow-left"></i> Back to Shop</button>
+        
+        <div class="detail-split">
+          <div class="detail-visuals">
+            <div id="product-3d-container" class="interactive-viewer">
+              <!-- If 3D is available, Three.js loads here. Else Image loads here. -->
+              <img src="" id="detail-image" alt="Product Image" style="display:none; width: 100%; border-radius:12px;">
+            </div>
+            <div class="visual-toggles">
+              <button class="btn-secondary" onclick="toggleViewer('3d')">3D View</button>
+              <button class="btn-secondary" onclick="toggleViewer('image')">Images</button>
+            </div>
+          </div>
+          
+          <div class="detail-info">
+            <h2 id="detail-title">Product Title</h2>
+            <div class="detail-meta">
+              <span class="rating" id="detail-rating"><i class="fa-solid fa-star"></i> 4.5</span>
+              <span class="seller">by <b id="detail-seller">Artisan Name</b></span>
+            </div>
+            <h3 class="price" id="detail-price">₹0.00</h3>
+            <p class="description" id="detail-desc">Full description of the wonderful handcrafted item, mentioning materials, history, and cultural significance.</p>
+            <button class="btn-primary large" id="add-to-cart-btn"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+            <button class="btn-secondary large" id="add-to-wishlist-btn" onclick="addToWishlist(null)"><i class="fa-solid fa-heart"></i> Add to Wishlist</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Livestream Section -->
+    <section id="livestream-section" class="view-section">
+      <div class="container">
+        <div style="margin-bottom: 20px;">
+           <button class="btn-secondary" onclick="showSection('home')"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+        </div>
+        <div class="header-banner" style="text-align: center; margin-bottom: 40px;">
+          <h2 class="section-title">Live Artisan Demonstrations</h2>
+          <p style="max-width: 600px; margin: 0 auto;">Watch master craftsmen create traditional arts in real-time, ask questions, and buy masterpieces instantly.</p>
+        </div>
+        <div class="livestream-layout">
+          <div class="video-container">
+          <div class="stream-placeholder">
+            <div class="live-badge">LIVE</div>
+            <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1" 
+                    title="Live Artisan Demonstration"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+            </iframe>
+          </div>
+          <div class="stream-info">
+            <img src="https://ui-avatars.com/api/?name=Ramesh&background=random" class="avatar">
+            <div>
+              <h3>Terracotta Pottery Making - Live Demo</h3>
+              <p>Ramesh Kumar • 1.2k watching</p>
+            </div>
+          </div>
+        </div>
+        <div class="chat-container">
+          <div class="chat-header">Live Chat</div>
+          <div class="chat-messages" id="chat-messages">
+            <div class="chat-msg"><b>Priya:</b> This looks amazing!</div>
+            <div class="chat-msg"><b>Alex:</b> What kind of clay is used?</div>
+          </div>
+          <div class="chat-input">
+            <input type="text" id="chat-text" placeholder="Say something...">
+            <button onclick="sendChat()"><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Seller Dashboard Section -->
+    <section id="dashboard-section" class="view-section">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+           <h2 class="section-title" style="margin: 0; text-align: left; width: auto;">Seller Dashboard</h2>
+           <div style="display: flex; gap: 10px;">
+             <button class="btn-secondary" onclick="openSellerProfile('Artisan Ramesh')"><i class="fa-solid fa-eye"></i> View My Public Profile</button>
+             <button class="btn-primary" onclick="showSection('tutorial')"><i class="fa-solid fa-graduation-cap"></i> Artisan Academy</button>
+           </div>
+        </div>
+        <div class="dashboard-grid">
+          <div class="card stat-card">
+            <h3>Total Sales</h3>
+            <p class="val">₹1,240</p>
+          </div>
+          <div class="card stat-card">
+            <h3>Active Listings</h3>
+            <p class="val">14</p>
+          </div>
+          <div class="card stat-card">
+            <h3>Followers</h3>
+            <p class="val">85</p>
+          </div>
+        </div>
+
+        <!-- Real Analytics Mockup -->
+        <div class="analytics-row mt-4">
+            <div class="card p-3 flex-2">
+                <h3>Earnings Trend (Last 6 Months)</h3>
+                <div class="chart-container">
+                    <div class="bar" style="height: 40%;" data-label="Oct"></div>
+                    <div class="bar" style="height: 60%;" data-label="Nov"></div>
+                    <div class="bar" style="height: 30%;" data-label="Dec"></div>
+                    <div class="bar" style="height: 80%;" data-label="Jan"></div>
+                    <div class="bar" style="height: 95%;" data-label="Feb"></div>
+                    <div class="bar highlight" style="height: 70%;" data-label="Mar"></div>
+                </div>
+            </div>
+            <div class="card p-3 flex-1">
+                <h3>Top Selling Categories</h3>
+                <ul class="simple-list">
+                    <li><span>Paintings</span> <span>45%</span></li>
+                    <li><span>Terracotta</span> <span>30%</span></li>
+                    <li><span>Textiles</span> <span>25%</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="add-product-form card mt-2">
+          <h3>Add New Handcraft</h3>
+          <form id="upload-form" onsubmit="handleUpload(event)">
+            <input type="text" placeholder="Product Title" required>
+            <select required>
+              <option value="">Select Category</option>
+              <option value="paintings">Paintings</option>
+              <option value="tribal">Tribal Art</option>
+              <option value="handmade">Handmade Items</option>
+            </select>
+            <input type="number" placeholder="Price (₹)" required>
+            <textarea placeholder="Description" rows="4" required></textarea>
+            <label>Upload Images:</label>
+            <input type="file" accept="image/*" multiple>
+            <label>Upload 3D Model (GLTF/OBJ) Optional:</label>
+            <input type="file" accept=".gltf,.glb,.obj">
+            <button type="submit" class="btn-primary mt-1">Publish Product</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seller Profile Section (What Buyers See) -->
+    <section id="seller-profile-section" class="view-section">
+      <div class="seller-header-banner" style="background-image: url('images/artisan-cover.png');">
+        <div class="overlay"></div>
+        <div class="container seller-header-info">
+           <div class="seller-profile-main">
+              <img src="images/artisan-profile.png" class="seller-avatar-large" alt="Artisan Name">
+              <div class="seller-title-box">
+                <h1 id="seller-profile-name">Artisan Ramesh</h1>
+                <p class="seller-badges"><i class="fa-solid fa-certificate"></i> Verified Master Artisan • <i class="fa-solid fa-location-dot"></i> Jaipur, Rajasthan</p>
+                <div class="seller-stats-inline">
+                  <span><b>4.9</b> <i class="fa-solid fa-star"></i> (124 Reviews)</span>
+                  <span><b>850</b> Followers</span>
+                  <span><b id="seller-years">15</b> Years Experience</span>
+                  <span id="seller-badge-container"></span>
+                </div>
+              </div>
+           </div>
+           <div class="seller-header-actions">
+              <button class="btn-primary large"><i class="fa-solid fa-user-plus"></i> Follow Artisan</button>
+              <button class="btn-secondary large" style="background: rgba(255,255,255,0.1); color: white; border-color: white;"><i class="fa-solid fa-envelope"></i> Message</button>
+           </div>
+        </div>
+      </div>
+
+      <div class="container seller-profile-content">
+        <div class="seller-tabs">
+          <button class="tab active" onclick="switchSellerTab('shop')">Shop Products</button>
+          <button class="tab" onclick="switchSellerTab('about')">Our Heritage</button>
+          <button class="tab" onclick="switchSellerTab('reviews')">Reviews</button>
+        </div>
+
+        <div id="seller-shop-tab" class="seller-tab-content active">
+          <div class="shop-controls">
+             <h2 class="section-title" style="text-align: left; margin: 0; font-size: 1.8rem; width: auto;">Curated Collection</h2>
+             <div class="search-bar" style="max-width: 250px;">
+               <input type="text" placeholder="Search in this shop...">
+               <button><i class="fa-solid fa-magnifying-glass"></i></button>
+             </div>
+          </div>
+          <div class="product-grid" id="seller-products-grid">
+            <!-- Products for this seller -->
+          </div>
+        </div>
+
+        <div id="seller-about-tab" class="seller-tab-content">
+           <div class="about-grid">
+              <div class="about-text">
+                <h3>History of Craft</h3>
+                <p>Born into a family of traditional Madhubani painters, Ramesh Kumar has spent over 15 years perfecting the ancient art of Mithila painting. Each stroke in his work tells a story of Indian mythology, nature, and the rich cultural tapestry of Bihar.</p>
+                <p>His work has been exhibited in national galleries and he is a recipient of several state awards for excellence in handicrafts. He uses natural organic dyes and handmade paper to ensure each piece is as authentic as the traditions it represents.</p>
+                
+                <h3 class="mt-2">Artisan Philosophy</h3>
+                <blockquote style="border-left: 4px solid var(--secondary-color); padding-left: 20px; font-style: italic; color: var(--text-light); font-size: 1.2rem; margin: 20px 0;">
+                  "Art is not just a skill, it is a prayer to our ancestors. When I paint, I am not just creating a picture, I am keeping a heartbeat of our culture alive."
+                </blockquote>
+              </div>
+              <div class="about-gallery">
+                 <img src="images/pots.jpg" alt="Workshop">
+                 <img src="images/warli.jpg" alt="Work in progress">
+              </div>
+           </div>
+        </div>
+
+        <div id="seller-reviews-tab" class="seller-tab-content">
+           <div class="reviews-summary">
+              <div class="rating-big">
+                 <span class="num">4.9</span>
+                 <div class="stars">
+                   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                 </div>
+                 <p>Excellent • Average rating from buyers</p>
+              </div>
+              <div class="rating-bars">
+                 <div class="bar-row"><span>5 Stars</span> <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div> <span>92%</span></div>
+                 <div class="bar-row"><span>4 Stars</span> <div class="bar-bg"><div class="bar-fill" style="width: 7%;"></div></div> <span>7%</span></div>
+                 <div class="bar-row"><span>3 Stars</span> <div class="bar-bg"><div class="bar-fill" style="width: 2%;"></div></div> <span>1%</span></div>
+              </div>
+           </div>
+           
+           <div class="reviews-list mt-2">
+              <div class="review-item">
+                 <div class="review-meta"><b>Anita Sharma</b> <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span> <span class="date">March 15, 2026</span></div>
+                 <p>"The Madhubani piece is even more beautiful in person. The detail is incredible and you can feel the handmade quality. Highly recommend Ramesh's work!"</p>
+              </div>
+              <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 20px 0;">
+              <div class="review-item">
+                 <div class="review-meta"><b>Vikram Reddy</b> <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span> <span class="date">February 28, 2026</span></div>
+                 <p>"Excellent packaging and fast shipping. Ramesh is truly a master of his craft. The colors are so vibrant and it adds soul to my living room."</p>
+              </div>
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artisan Academy / Tutorial Section -->
+    <section id="tutorial-section" class="view-section">
+      <div class="academy-hero">
+        <div class="container academy-hero-flex">
+           <div class="academy-content">
+             <span class="badge-new">NEW: Artisan Academy</span>
+             <h1>Master the Art of <span class="highlight">Heritage Craft</span></h1>
+             <p>Learn age-old Indian techniques, business management, and digital presence from master craftsmen and experts.</p>
+             <div class="academy-actions">
+                <button class="btn-primary large" onclick="window.scrollTo(0, 800)">Explore Courses</button>
+                <button class="btn-secondary large" style="border-color: white; color: white; background: rgba(255,255,255,0.1);">Become a Mentor</button>
+             </div>
+           </div>
+           <div class="academy-visual">
+              <div class="abstract-ring"></div>
+              <i class="fa-solid fa-graduation-cap"></i>
+           </div>
+        </div>
+      </div>
+
+      <div class="container mt-4">
+        <h2 class="section-title">Learn Traditional Techniques</h2>
+        <div class="tutorial-grid">
+           <!-- Card 1 -->
+           <div class="tutorial-card card">
+              <div class="thumb">
+                 <img src="images/tutorial-pottery.png" alt="Pottery Tutorial">
+                 <span class="play-btn"><i class="fa-solid fa-play"></i></span>
+                 <span class="duration">12:45</span>
+              </div>
+              <div class="tut-info">
+                 <span class="cat">Terracotta</span>
+                 <h3>Shaping the Perfect Clay Pot</h3>
+                 <p>Master the fundamental movements of the potter's wheel and clay consistency.</p>
+                 <div class="tut-meta">
+                    <span><i class="fa-solid fa-user-tie"></i> Master Ramesh</span>
+                    <span><i class="fa-solid fa-signal"></i> Beginner</span>
+                 </div>
+              </div>
+           </div>
+
+           <!-- Card 2 -->
+           <div class="tutorial-card card">
+              <div class="thumb">
+                 <img src="images/tutorial-painting.png" alt="Painting Tutorial">
+                 <span class="play-btn"><i class="fa-solid fa-play"></i></span>
+                 <span class="duration">18:20</span>
+              </div>
+              <div class="tut-info">
+                 <span class="cat">Mithila Art</span>
+                 <h3>Madhubani Line Techniques</h3>
+                 <p>Learn the intricate Katchni (hatching) and Bharni (filling) styles of Madhubani.</p>
+                 <div class="tut-meta">
+                    <span><i class="fa-solid fa-user-tie"></i> Artisan Sunita</span>
+                    <span><i class="fa-solid fa-signal"></i> Pro</span>
+                 </div>
+              </div>
+           </div>
+
+           <!-- Card 3 -->
+           <div class="tutorial-card card">
+              <div class="thumb">
+                 <img src="images/warli.jpg" alt="Warli Tutorial" style="height: 200px; object-fit: cover; width: 100%;">
+                 <span class="play-btn"><i class="fa-solid fa-play"></i></span>
+                 <span class="duration">09:30</span>
+              </div>
+              <div class="tut-info">
+                 <span class="cat">Tribal Art</span>
+                 <h3>Storytelling with Warli Shapes</h3>
+                 <p>Understand the geometric symbolism behind the traditional Warli circle, triangle, and square.</p>
+                 <div class="tut-meta">
+                    <span><i class="fa-solid fa-user-tie"></i> Ashok Varli</span>
+                    <span><i class="fa-solid fa-signal"></i> Beginner</span>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <h2 class="section-title mt-4">Grow Your Artisan Business</h2>
+        <div class="business-grid">
+           <div class="biz-card card">
+              <div class="biz-icon"><i class="fa-solid fa-camera"></i></div>
+              <h3>Photography for Artisans</h3>
+              <p>Learn how to capture the soul of your product using just a smartphone and natural light.</p>
+              <a href="#" class="link">Read Guide <i class="fa-solid fa-arrow-right"></i></a>
+           </div>
+           <div class="biz-card card">
+              <div class="biz-icon"><i class="fa-solid fa-tags"></i></div>
+              <h3>Pricing Your Masterpiece</h3>
+              <p>Calculate labor, materials, and value of heritage to price your items competitively.</p>
+              <a href="#" class="link">Watch Video <i class="fa-solid fa-arrow-right"></i></a>
+           </div>
+           <div class="biz-card card">
+              <div class="biz-icon"><i class="fa-solid fa-globe"></i></div>
+              <h3>Selling Internationally</h3>
+              <p>Everything you need to know about international shipping, customs, and global aesthetics.</p>
+              <a href="#" class="link">Join Webinar <i class="fa-solid fa-arrow-right"></i></a>
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Authenticity Checker -->
+    <section id="verify-authenticity-section" class="view-section">
+      <div class="container py-4">
+        <button class="btn-secondary" onclick="showSection('home')"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+        
+        <div class="text-center mt-2">
+          <h2 class="section-title">Sambalpuri Authenticity Proof</h2>
+          <p class="subtitle text-light">Powered by <strong>Real AI (TensorFlow.js)</strong> to analyze pattern symmetry and weave density at the pixel level.</p>
+        </div>
+
+        <div class="verify-layout mt-4">
+          <div class="verify-main-card card glass-card text-center">
+            <div id="upload-stage">
+              <div class="scan-area">
+                <i class="fa-solid fa-camera-viewfinder scan-pulse"></i>
+                <div class="scan-line"></div>
+              </div>
+              <h3>Scan or Upload Saree Image</h3>
+              <p>Position the camera to show the intricate Ikat weave boundaries.</p>
+              
+              <div class="verify-actions mt-3">
+                <input type="file" id="saree-image-input" accept="image/*" hidden onchange="handleSareeScan(this)">
+                <button class="btn-primary" onclick="document.getElementById('saree-image-input').click()">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Upload Photo
+                </button>
+                <button class="btn-secondary" onclick="simulateCameraScan()">
+                  <i class="fa-solid fa-camera"></i> Live Scan
+                </button>
+              </div>
+            </div>
+
+            <div id="analysis-stage" style="display: none;">
+              <div class="analysis-loader">
+                <div class="ai-brain">
+                   <i class="fa-solid fa-microchip fa-spin"></i>
+                </div>
+                <h3 id="analysis-text">Initializing AI Model...</h3>
+                <div class="analysis-steps">
+                  <div class="step-item" id="step-1">Pattern Extraction</div>
+                  <div class="step-item" id="step-2">Weave Density Mapping</div>
+                  <div class="step-item" id="step-3">Symmetry Verification</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="result-stage" style="display: none;">
+              <!-- Result content will be injected by JS -->
+            </div>
+          </div>
+
+          <div class="verify-sidebar">
+             <div class="info-box card">
+                <h3 id="verify-ai-logic-title"><i class="fa-solid fa-circle-info"></i> AI Logic</h3>
+                <p id="verify-ai-logic-desc">Our Deep Learning model (CNN) identifies the subtle variations in Ikat thread alignment that are human-made, which machines cannot replicate with perfect irregularity.</p>
+                <ul class="simple-list mt-1">
+                  <li id="v-feature-1"><i class="fa-solid fa-check text-success"></i> Detects Weft/Warp overlaps</li>
+                  <li id="v-feature-2"><i class="fa-solid fa-check text-success"></i> Analyzes dye bleeding edges</li>
+                  <li id="v-feature-3"><i class="fa-solid fa-check text-success"></i> Verifies design unique signature</li>
+                </ul>
+             </div>
+             
+             <div class="info-box card mt-2">
+                <h3 id="verify-future-title"><i class="fa-solid fa-bolt"></i> Future Support</h3>
+                <p id="verify-future-desc">We are training models for:</p>
+                <div class="badge-group">
+                   <span class="tag-badge">Pattachitra</span>
+                   <span class="tag-badge">Dokra</span>
+                   <span class="tag-badge">Ikat Textiles</span>
+                </div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checkout Section (Multi-Step Wizard) -->
+    <section id="checkout-section" class="view-section">
+      <div class="container py-4">
+        <div class="checkout-progress">
+          <div class="step-marker active" data-label="Address">1</div>
+          <div class="step-marker" data-label="Payment">2</div>
+          <div class="step-marker" data-label="Review">3</div>
+        </div>
+        
+        <div class="checkout-layout">
+           <div class="checkout-wizard card card-glow">
+              <div id="step-address" class="checkout-step active">
+                 <h3>Shipping Information</h3>
+                 <form onsubmit="processOrder(event)">
+                    <div class="form-row">
+                      <input type="text" placeholder="First Name" required>
+                      <input type="text" placeholder="Last Name" required>
+                    </div>
+                    <input type="text" placeholder="Flat/House No., Building" required>
+                    <input type="text" placeholder="Area, Colony, Street" required>
+                    <div class="form-row">
+                      <input type="text" placeholder="City / Town" required>
+                      <input type="text" placeholder="Pincode" required>
+                    </div>
+                    <button type="submit" class="btn-primary large full-width mt-1">Deliver to this Address</button>
+                 </form>
+              </div>
+
+              <div id="step-payment" class="checkout-step">
+                 <h3>Select Payment Method</h3>
+                 <div class="payment-options-list">
+                    <label class="payment-card-option">
+                        <input type="radio" name="pay" checked>
+                        <div class="pay-info"><i class="fa-solid fa-mobile-screen"></i> <span>BHIM UPI / Google Pay</span></div>
+                    </label>
+                    <label class="payment-card-option">
+                        <input type="radio" name="pay">
+                        <div class="pay-info"><i class="fa-solid fa-credit-card"></i> <span>Credit / Debit / ATM Card</span></div>
+                    </label>
+                    <label class="payment-card-option">
+                        <input type="radio" name="pay">
+                        <div class="pay-info"><i class="fa-solid fa-truck-fast"></i> <span>Cash on Delivery</span></div>
+                    </label>
+                 </div>
+                 <button class="btn-primary large full-width mt-2" onclick="nextCheckoutStep()">Continue to Payment</button>
+              </div>
+
+              <div id="step-confirm" class="checkout-step">
+                 <h3>Order Review & Confirmation</h3>
+                 <p>By clicking "Place Order", you agree to our Terms & Conditions.</p>
+                 <div class="final-review-item">Estimated Delivery: <strong>March 28, 2026</strong></div>
+                 <button class="btn-primary large full-width mt-2" onclick="nextCheckoutStep()">Place Final Order</button>
+              </div>
+           </div>
+           
+           <div class="checkout-summary card glass-card">
+             <h3>Order Summary</h3>
+             <div id="checkout-items-list"></div>
+             <hr class="divider">
+             <div class="summary-total"><span>Subtotal</span> <span id="summary-subtotal">₹0.00</span></div>
+             <div class="summary-total"><span>Shipping</span> <span style="color:var(--primary-color);">FREE</span></div>
+             <div class="summary-total bold big"><span>Total</span> <span id="summary-total">₹0.00</span></div>
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Success View -->
+    <section id="order-success-section" class="view-section">
+      <div class="container text-center py-4">
+        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h2 class="section-title">Thank You! Order Placed.</h2>
+        <p>A confirmation email has been sent. Your order ID is <strong id="success-order-id">CM-12845</strong></p>
+        <div class="mt-2">
+            <button class="btn-primary large" onclick="showSection('home')">Continue Shopping</button>
+            <button class="btn-secondary large" onclick="alert('Order tracking details will appear in My Orders soon!')">Track My Order</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Cart Sidebar -->
+  <div id="cart-sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>Your Cart</h2>
+      <button class="close-btn" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- Cart items appended here -->
+    </div>
+    <div class="cart-footer">
+      <div class="total">Total: <span id="cart-total">₹0.00</span></div>
+      <button class="btn-primary full-width" onclick="checkout()">Secure Checkout</button>
+    </div>
+  </div>
+
+  <!-- Wishlist Sidebar -->
+  <div id="wishlist-sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>Your Wishlist</h2>
+      <button class="close-btn" onclick="toggleWishlist()">&times;</button>
+    </div>
+    <div class="wishlist-items" id="wishlist-items">
+      <!-- Wishlist items appended here -->
+    </div>
+    <div class="wishlist-footer">
+      <div class="total">Items: <span id="wishlist-count">0</span></div>
+      <button class="btn-primary full-width" onclick="clearWishlist()">Clear Wishlist</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="brand">
+        <h3><i class="fa-solid fa-palette"></i> CraftMint</h3>
+        <p>Empowering traditional Indian artisans by connecting them with global art lovers.</p>
+      </div>
+      <div class="links">
+        <h4>Explore</h4>
+        <a href="#" onclick="showSection('home')">About Us</a>
+        <a href="#" onclick="showSection('tourism')">Artisan Tourism</a>
+        <a href="#" onclick="toggleHelpChat()">Help Center</a>
+        <a href="#" onclick="showSection('shop')">Track Orders</a>
+      </div>
+      <div class="newsletter">
+        <h4>Newsletter</h4>
+        <p>Get updates on new collections and live events.</p>
+        <div class="search-bar">
+          <input type="email" placeholder="Email address">
+          <button>Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      &copy; 2026 CraftMint Platform. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Floating Live Chat Bubble -->
+  <div class="chat-bubble" onclick="showSection('livestream')">
+    <i class="fa-solid fa-comment-dots"></i>
+    <span class="chat-status">Live</span>
+  </div>
+
+  <!-- Fixed Help Bot Button -->
+  <button id="help-bot-btn" onclick="toggleHelpChat()">
+    <i class="fa-solid fa-headset"></i> <span>Help / ସହାୟତା</span>
+  </button>
+
+  <!-- AI Help Modal -->
+  <div id="help-chat-modal" class="chat-modal">
+    <div class="chat-header">
+      <span><i class="fa-solid fa-robot"></i> Crafty AI Assistant</span>
+      <button onclick="toggleHelpChat()">&times;</button>
+    </div>
+    <div id="help-chat-messages" class="chat-messages">
+       <div class="msg bot">Namaskar! I am Your Odisha Heritage Expert. How can I help you support local artisans today?</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="help-msg-input" placeholder="Type a message or help command...">
+      <button onclick="sendHelpMsg()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  <script src="js/components.js"></script>
+  <script src="js/authenticity.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Branding update for any dynamic text
+    document.title = "CraftMint - Discover Hidden Skills & Heritage";
+  </script>
+</body>
+</html>
