@@ -47,22 +47,27 @@ async function performRealAIAnalysis(img) {
     const statusText = document.getElementById('analysis-text');
     const steps = document.querySelectorAll('.step-item');
 
-    // STEP 1: Pattern Feature Extraction
-    statusText.innerText = "Extracting Ikat Patterns...";
-    steps[0].classList.add('active');
-    
-    // Pixel Analysis using TF.js
-    const tensor = tf.browser.fromPixels(img);
-    const resized = tf.image.resizeBilinear(tensor, [224, 224]);
-    const normalized = resized.div(255.0);
-    
-    // Compute variance (Real AI signal: Machines have low variance in patterns)
-    const { mean, variance } = tf.moments(normalized);
-    const varValue = (await variance.data())[0];
-    
-    await tf.nextFrame();
-    steps[0].classList.remove('active');
-    steps[0].classList.add('done');
+    try {
+        if (!window.tf) {
+            throw new Error("TensorFlow.js not loaded. Please refresh.");
+        }
+
+        // STEP 1: Pattern Feature Extraction
+        statusText.innerText = "Extracting Ikat Patterns...";
+        steps[0].classList.add('active');
+        
+        // Pixel Analysis using TF.js
+        const tensor = tf.browser.fromPixels(img);
+        const resized = tf.image.resizeBilinear(tensor, [224, 224]);
+        const normalized = resized.div(255.0);
+        
+        // Compute variance (Real AI signal: Machines have low variance in patterns)
+        const { mean, variance } = tf.moments(normalized);
+        const varValue = (await variance.data())[0];
+        
+        await tf.nextFrame();
+        steps[0].classList.remove('active');
+        steps[0].classList.add('done');
 
     // STEP 2: Weave Density Mapping
     statusText.innerText = "Mapping Weave Density...";
@@ -133,6 +138,13 @@ async function performRealAIAnalysis(img) {
     setTimeout(() => {
         showAuthenticityResultFromAI(resultType, finalConfidence, symmetryScore, weaveScore);
     }, 1000);
+
+    } catch (error) {
+        console.error("AI Analysis Error:", error);
+        statusText.innerText = "Error during analysis: " + error.message;
+        steps.forEach(s => s.classList.remove('active'));
+        setTimeout(() => resetVerify(), 3000);
+    }
 }
 
 function showAuthenticityResultFromAI(type, confidence, symmetry, weave) {

@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Translation Data
-const translations = {
+window.translations = {
   en: {
     home: "Home",
     shop: "Shop",
