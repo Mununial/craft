@@ -41,6 +41,7 @@
           <a href="#" onclick="showSection('shop')">Shop</a>
           <a href="#" onclick="showSection('opportunities')">Work Ops</a>
           <a href="#" onclick="showSection('tourism')">Tourism</a>
+          <a href="#" onclick="showSection('subscriptions')">Subscriptions</a>
           <a href="#" onclick="showSection('verify-authenticity')" class="nav-highlight"><i class="fa-solid fa-shield-halved"></i> Verify</a>
           <a href="#" onclick="toggleHelpChat()"><i class="fa-solid fa-headset"></i> Support</a>
           <a href="#" onclick="showSection('dashboard')">Sell/Register</a>
@@ -847,6 +848,65 @@
       </div>
     </section>
 
+    <!-- Subscriptions Section -->
+    <section id="subscriptions-section" class="view-section">
+      <div class="container py-4">
+        <h2 class="section-title text-center">Artisan Membership Plans</h2>
+        <p class="subtitle text-center">Empower your craft with our specialized growth plans.</p>
+        
+        <div class="pricing-grid mt-4">
+          <!-- Basic Plan -->
+          <div class="pricing-card card glass-card">
+            <div class="card-header">
+              <h3>Basic</h3>
+              <div class="price">Free <span>/ lifetime</span></div>
+            </div>
+            <ul class="features">
+              <li><i class="fa-solid fa-check"></i> 5 Product Listings</li>
+              <li><i class="fa-solid fa-check"></i> Standard Profile</li>
+              <li><i class="fa-solid fa-check"></i> Community Support</li>
+              <li class="disabled"><i class="fa-solid fa-xmark"></i> Verified Badge</li>
+              <li class="disabled"><i class="fa-solid fa-xmark"></i> 3D Product Viewer</li>
+            </ul>
+            <button class="btn-secondary full-width" onclick="alert('Welcome to the Basic Plan!')">Join Now</button>
+          </div>
+
+          <!-- Pro Plan -->
+          <div class="pricing-card card glass-card popular">
+            <div class="popular-badge">Most Popular</div>
+            <div class="card-header">
+              <h3>Artisan Pro</h3>
+              <div class="price">₹499 <span>/ month</span></div>
+            </div>
+            <ul class="features">
+              <li><i class="fa-solid fa-check"></i> Unlimited Listings</li>
+              <li><i class="fa-solid fa-check"></i> Verified Artisan Badge</li>
+              <li><i class="fa-solid fa-check"></i> 3D Viewer for Products</li>
+              <li><i class="fa-solid fa-check"></i> Priority in Search</li>
+              <li><i class="fa-solid fa-check"></i> Sales Analytics</li>
+            </ul>
+            <button class="btn-primary full-width" onclick="alert('Upgrading to Artisan Pro...')">Go Pro</button>
+          </div>
+
+          <!-- Business Plan -->
+          <div class="pricing-card card glass-card">
+            <div class="card-header">
+              <h3>Business</h3>
+              <div class="price">₹1499 <span>/ month</span></div>
+            </div>
+            <ul class="features">
+              <li><i class="fa-solid fa-check"></i> All Pro Features</li>
+              <li><i class="fa-solid fa-check"></i> Export License Help</li>
+              <li><i class="fa-solid fa-check"></i> Dedicated Manager</li>
+              <li><i class="fa-solid fa-check"></i> Featured Homepage</li>
+              <li><i class="fa-solid fa-check"></i> Bulk Order Inquiries</li>
+            </ul>
+            <button class="btn-secondary full-width" onclick="alert('Contacting sales for Business Plan...')">Contact Sales</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Cart Sidebar -->
@@ -887,7 +947,8 @@
       </div>
       <div class="links">
         <h4>Explore</h4>
-        <a href="#" onclick="showSection('home')">About Us</a>
+        <a href="#" onclick="showSection('home')">Home / About</a>
+        <a href="#" onclick="showSection('subscriptions')">Artisan Plans</a>
         <a href="#" onclick="showSection('tourism')">Artisan Tourism</a>
         <a href="#" onclick="toggleHelpChat()">Help Center</a>
         <a href="#" onclick="showSection('shop')">Track Orders</a>

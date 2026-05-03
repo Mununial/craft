@@ -205,7 +205,12 @@ window.translations = {
     history_of_craft: "History of Craft",
     artisan_philo: "Artisan Philosophy",
     reviews_rating: "Average rating from buyers",
-    excellent: "Excellent"
+    excellent: "Excellent",
+    subscriptions: "Subscriptions",
+    sub_plans: "Membership Plans",
+    join_now: "Join Now",
+    go_pro: "Go Pro",
+    contact_sales: "Contact Sales"
   },
   or: {
     home: "ମୁଖ୍ୟ ପୃଷ୍ଠା",
@@ -297,7 +302,12 @@ window.translations = {
     history_of_craft: "କଳାର ଇତିହାସ",
     artisan_philo: "କାରିଗର ଦର୍ଶନ",
     reviews_rating: "କ୍ରେତାଙ୍କ ହାରାହାରି ମୂଲ୍ୟାଙ୍କନ",
-    excellent: "ଉତ୍କୃଷ୍ଟ"
+    excellent: "ଉତ୍କୃଷ୍ଟ",
+    subscriptions: "ସଦସ୍ୟତା (Subscriptions)",
+    sub_plans: "ସଦସ୍ୟତା ଯୋଜନା",
+    join_now: "ବର୍ତ୍ତମାନ ଯୋଡି ହୁଅନ୍ତୁ",
+    go_pro: "ପ୍ରୋ ହୁଅନ୍ତୁ",
+    contact_sales: "ବିକ୍ରୟ ବିଭାଗ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ"
   }
 };
 
@@ -320,9 +330,10 @@ function applyLanguage(lang) {
   if(navLinks[1]) navLinks[1].innerText = t.shop;
   if(navLinks[2]) navLinks[2].innerText = t.opportunities || "Work Ops";
   if(navLinks[3]) navLinks[3].innerText = t.tourism || "Tourism";
-  if(navLinks[4]) navLinks[4].innerHTML = `<i class="fa-solid fa-shield-halved"></i> ${lang === 'or' ? 'ଯାଞ୍ଚ କରନ୍ତୁ' : 'Verify'}`;
-  if(navLinks[5]) navLinks[5].innerHTML = `<i class="fa-solid fa-headset"></i> ${t.help_center || 'Support'}`;
-  if(navLinks[6]) navLinks[6].innerText = t.sell;
+  if(navLinks[4]) navLinks[4].innerText = t.subscriptions || "Subscriptions";
+  if(navLinks[5]) navLinks[5].innerHTML = `<i class="fa-solid fa-shield-halved"></i> ${lang === 'or' ? 'ଯାଞ୍ଚ କରନ୍ତୁ' : 'Verify'}`;
+  if(navLinks[6]) navLinks[6].innerHTML = `<i class="fa-solid fa-headset"></i> ${t.help_center || 'Support'}`;
+  if(navLinks[7]) navLinks[7].innerText = t.sell;
 
   // Hero
   const heroH1 = document.querySelector('.hero-content h1');
@@ -368,65 +379,7 @@ function applyLanguage(lang) {
   const shopTitle = document.querySelector('#shop-section .section-title');
   if(shopTitle) shopTitle.innerText = t.all_artworks;
 
-  // detail section
-  const detailBackBtn = document.querySelector('#product-detail-section .btn-secondary');
-  if(detailBackBtn) detailBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> ${t.back_shop}`;
-  const addToCartBtn = document.getElementById('add-to-cart-btn');
-  if(addToCartBtn) addToCartBtn.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> ${t.add_to_cart}`;
-  const wishBtn = document.getElementById('add-to-wishlist-btn');
-  if(wishBtn) wishBtn.innerHTML = `<i class="fa-solid fa-heart"></i> ${t.add_to_wishlist}`;
-
-  // Dashboard
-  const dashTitle = document.querySelector('#dashboard-section .section-title');
-  if(dashTitle) dashTitle.innerText = t.seller_dashboard;
-  const statCards = document.querySelectorAll('.stat-card h3');
-  if(statCards[0]) statCards[0].innerText = t.total_sales || "Total Sales";
-  if(statCards[1]) statCards[1].innerText = t.active_listings || "Active Crafts";
-  if(statCards[2]) statCards[2].innerText = t.followers || "Followers";
-  const uploadH3 = document.querySelector('.add-product-form h3');
-  if(uploadH3) uploadH3.innerText = t.add_new_handcraft;
-  const publishBtn = document.querySelector('#upload-form button');
-  if(publishBtn) publishBtn.innerText = t.publish_product;
-
-  // Login
-  const loginBtn = document.getElementById('login-nav-btn');
-  if(loginBtn) loginBtn.innerText = t.login;
-
-  // Help Bot Button
-  const helpBtn = document.querySelector('#help-bot-btn span');
-  if(helpBtn) helpBtn.innerText = t.support_btn || "Help / ସହାୟତା";
-
-  // Chatbot Input
-  const chatInput = document.getElementById('help-msg-input');
-  if(chatInput) chatInput.placeholder = t.search_placeholder;
-
-  // Chatbot Greeting
-  const chatGreeting = document.querySelector('#help-chat-messages .msg.bot');
-  if(chatGreeting) chatGreeting.innerText = t.bot_greeting || "Namaskar! I am Your Odisha Heritage Expert. How can I help you support local artisans today?";
-
   // Authenticity Section
-  const verifyTitle = document.querySelector('#verify-authenticity-section .section-title');
-  if(verifyTitle) verifyTitle.innerText = t.verify_title;
-  const verifySubtitle = document.querySelector('#verify-authenticity-section .subtitle');
-  if(verifySubtitle) verifySubtitle.innerText = t.verify_subtitle;
-  const backHomeVerify = document.querySelector('#verify-authenticity-section .btn-secondary');
-  if(backHomeVerify) backHomeVerify.innerHTML = `<i class="fa-solid fa-arrow-left"></i> ${t.back_home}`;
-  const uploadH3Saree = document.querySelector('#upload-stage h3');
-  if(uploadH3Saree) uploadH3Saree.innerText = t.scan_saree;
-  const analyzeSteps = document.querySelectorAll('.step-item');
-  if(analyzeSteps[0]) analyzeSteps[0].innerText = t.analyzing_ikat;
-  if(analyzeSteps[1]) analyzeSteps[1].innerText = t.weave_density;
-  if(analyzeSteps[2]) analyzeSteps[2].innerText = t.symmetry_check;
-
-  // Sidebar
-  const vTitle = document.getElementById('verify-ai-logic-title');
-  if(vTitle) vTitle.innerHTML = `<i class="fa-solid fa-circle-info"></i> ${t.ai_logic_title}`;
-  const vDesc = document.getElementById('verify-ai-logic-desc');
-  if(vDesc) vDesc.innerText = t.ai_logic_desc;
-  const vF1 = document.getElementById('v-feature-1');
-  if(vF1) vF1.innerHTML = `<i class="fa-solid fa-check text-success"></i> ${t.feature_1}`;
-  const vF2 = document.getElementById('v-feature-2');
-  if(vF2) vF2.innerHTML = `<i class="fa-solid fa-check text-success"></i> ${t.feature_2}`;
   const vF3 = document.getElementById('v-feature-3');
   if(vF3) vF3.innerHTML = `<i class="fa-solid fa-check text-success"></i> ${t.feature_3}`;
   const vFuture = document.getElementById('verify-future-title');
@@ -460,7 +413,15 @@ function applyLanguage(lang) {
     if(label.innerText.includes("Total")) label.innerText = t.total;
   });
 
-  // Render products again to get translated categories if needed
+  // Subscriptions
+  const subTitle = document.querySelector('#subscriptions-section .section-title');
+  if(subTitle) subTitle.innerText = t.sub_plans;
+  const subBtns = document.querySelectorAll('#subscriptions-section button');
+  if(subBtns[0]) subBtns[0].innerText = t.join_now;
+  if(subBtns[1]) subBtns[1].innerText = t.go_pro;
+  if(subBtns[2]) subBtns[2].innerText = t.contact_sales;
+
+  // Render products again
   renderProductsGrid(currentProducts, 'shop-grid');
   filterHomeProducts('All');
 }
@@ -534,59 +495,82 @@ async function fetchProducts() {
     const res = await fetch(`${window.API_BASE_URL || ''}/api/products`);
     const data = await res.json();
     if(data.success) {
-      currentProducts = data.data;
-      filterHomeProducts('All');
-      renderProductsGrid(currentProducts, 'shop-grid');
+      currentProducts = [...data.data];
     }
   } catch (error) {
     console.error('Error fetching products, falling back to static mock data:', error);
-    // Fallback if backend is not running
-    currentProducts = [
-      // Paintings
-      { id: 'p1', title: 'Madhubani Art', price: 120, category: 'Painting', images: ['images/krishna.jpg'], seller: 'Artisan Ramesh', rating: 4.8 },
-      { id: 'p2', title: 'Warli Ancestral Canvas', price: 85, category: 'Painting', images: ['images/warli.jpg'], seller: 'Adivasi Collective', rating: 4.9 },
-      { id: 'p3', title: 'Pichwai Cow Artwork', price: 150, category: 'Painting', images: ['images/krishna.jpg'], seller: 'Rajput Creations', rating: 4.7 },
-      { id: 'p4', title: 'Kalamkari Tree of Life', price: 110, category: 'Painting', images: ['images/warli.jpg'], seller: 'Andhra Artisans', rating: 4.6 },
-      { id: 'p5', title: 'Gond Tribal Piece', price: 95, category: 'Painting', images: ['images/krishna.jpg'], seller: 'Bhopal Arts', rating: 5.0 },
-      
-      // Terracotta
-      { id: 't1', title: 'Terracotta Clay Pot', price: 45, category: 'Terracotta', images: ['images/pots.jpg'], model3D_url: 'yes', seller: 'Priya Crafts', rating: 4.5 },
-      { id: 't2', title: 'Earthen Diya Set', price: 20, category: 'Terracotta', images: ['images/pots.jpg'], seller: 'Rustic Roots', rating: 4.8 },
-      { id: 't3', title: 'Carved Wooden Elephant', price: 150, category: 'Terracotta', images: ['images/elephants.jpg'], model3D_url: 'yes', seller: 'Kerala Carvings', rating: 4.7 },
-      { id: 't4', title: 'Clay Wind Chimes', price: 35, category: 'Terracotta', images: ['images/pots.jpg'], seller: 'Matikala Crafts', rating: 4.4 },
-      { id: 't5', title: 'Temple Bell Sculpture', price: 80, category: 'Terracotta', images: ['images/elephants.jpg'], seller: 'Heritage Sculptures', rating: 4.9 },
-
-      // Jewelry
-      { id: 'j1', title: 'Kundal Gold Necklace', price: 820, category: 'Jewelry', images: ['images/jewelry.png'], seller: 'Tanishq Crafts', rating: 4.9 },
-      { id: 'j2', title: 'Silver Tribal Anklet', price: 45, category: 'Jewelry', images: ['images/jewelry.jpg'], seller: 'Banjara Finds', rating: 4.8 },
-      { id: 'j3', title: 'Meenakari Jhumkas', price: 75, category: 'Jewelry', images: ['images/jewelry.png'], seller: 'Jaipur Gems', rating: 4.6 },
-      { id: 'j4', title: 'Oxidized Choker Set', price: 30, category: 'Jewelry', images: ['images/jewelry.jpg'], seller: 'Trendy Tribe', rating: 4.5 },
-      { id: 'j5', title: 'Kundan Bridal Set', price: 1200, category: 'Jewelry', images: ['images/jewelry.png'], seller: 'Royal Jewels', rating: 5.0 },
-
-      // Textiles
-      { id: 'x1', title: 'Banarasi Silk Saree', price: 290, category: 'Textiles', images: ['images/textile.jpg'], seller: 'Varanasi Weavers', rating: 5.0 },
-      { id: 'x2', title: 'Kanjeevaram Silk', price: 450, category: 'Textiles', images: ['images/textile.jpg'], seller: 'South Weaves', rating: 4.9 },
-      { id: 'x3', title: 'Block Printed Dupatta', price: 40, category: 'Textiles', images: ['images/textile.jpg'], seller: 'Jaipur Prints', rating: 4.6 },
-      { id: 'x4', title: 'Pashmina Shawl', price: 320, category: 'Textiles', images: ['images/textile.jpg'], seller: 'Kashmir Looms', rating: 4.8 },
-      { id: 'x5', title: 'Ikat Cotton Fabric', title_or: 'ଇକାତ ସୂତା କପଡା', price: 25, category: 'Textiles', images: ['images/textile.jpg'], seller: 'Odisha Handlooms', rating: 4.5, district: 'Bargarh' },
-      
-      // Multi-District Odisha Special
-      { id: 'od1', title: 'Sambalpuri Silk Saree', title_or: 'ସମ୍ବଲପୁରୀ ସିଲ୍କ ଶାଢୀ', price: 350, category: 'Textiles', images: ['images/sambalpuri_saree.png'], seller: 'Sambalpur Weavers Co-op', seller_or: 'ସମ୍ବଲପୁରୀ ବୁଣାକାର ସମବାୟ ସମିତି', rating: 5.0, district: 'Sambalpur', description: 'Authentic Sambalpuri Silk Saree with traditional Bandha (Ikat) work.', description_or: 'ପାରମ୍ପରିକ ବାନ୍ଧ କାମ ସହିତ ପ୍ରାମାଣିକ ସମ୍ବଲପୁରୀ ସିଲ୍କ ଶାଢୀ |' },
-      { id: 'od2', title: 'Pattachitra Painting', title_or: 'ପଟ୍ଟଚିତ୍ର ଚିତ୍ରକଳା', price: 180, category: 'Painting', images: ['images/pattachitra.jpg'], seller: 'Raghurajpur Artisans', seller_or: 'ରଘୁରାଜପୁର କାରିଗର', rating: 4.9, district: 'Puri', description: 'Traditional cloth-based scroll painting from Odisha.', description_or: 'ଓଡ଼ିଶାର ପାରମ୍ପରିକ ପଟ୍ଟଚିତ୍ର ସ୍କ୍ରୋଲ୍ ପେଣ୍ଟିଂ |' },
-      { id: 'od3', title: 'Pipli Applique Lamp', title_or: 'ପିପିଲି ଚାନ୍ଦୁଆ ଲ୍ୟାମ୍ପ', price: 65, category: 'Home Decor', images: ['images/pipli_applique.jpg'], seller: 'Pipli Craft House', seller_or: 'ପିପିଲି କ୍ରାଫ୍ଟ ହାଉସ୍', rating: 4.7, district: 'Puri', description: 'Vibrant applique work from Pipli, featuring mirror work.', description_or: 'ପିପିଲିର ଜୀବନ୍ତ ଚାନ୍ଦୁଆ କାମ, ଯେଉଁଥିରେ ପ୍ରତିବିମ୍ବ କାମ ରହିଛି |' },
-      { id: 'od4', title: 'Koraput Arabica Coffee', title_or: 'କୋରାପୁଟ ଆରାବିକା କଫି', price: 15, category: 'Tribal Art/Goods', images: ['images/koraput_coffee.jpg'], seller: 'Koraput Farmers', seller_or: 'କୋରାପୁଟ ଚାଷୀ', rating: 4.8, district: 'Koraput', description: 'Pure organic Arabica coffee from the hills of Koraput.', description_or: 'କୋରାପୁଟ ପାହାଡରୁ ଶୁଦ୍ଧ ଜୈବିକ ଆରାବିକା କଫି |' },
-      { id: 'od5', title: 'Silver Filigree Box', title_or: 'କଟକ ରୂପା ତାରକସି ବାକ୍ସ', price: 220, category: 'Jewelry', images: ['images/silver_filigree.jpg'], seller: 'Cuttack Guild', seller_or: 'କଟକ ସୁନା ରୁପା କାରିଗର ସଂଘ', rating: 5.0, district: 'Cuttack', description: 'Exquisite silver wire craft (Tarakasi) from Cuttack.', description_or: 'କଟକର ଚମତ୍କାର ରୁପା ତାରକସି କଳା |' },
-      { id: 'od6', title: 'Bomkai Cotton Saree', title_or: 'ବମକେଇ ସୂତା ଶାଢୀ', price: 115, category: 'Textiles', images: ['images/textile.jpg'], seller: 'Ganjam Weavers', seller_or: 'ଗଞ୍ଜାମ ବୁଣାକାର', rating: 4.6, district: 'Ganjam', description: 'Handwoven Bomkai saree with unique border patterns.', description_or: 'ଅନନ୍ୟ ବର୍ଡର ପ୍ୟାଟର୍ନ ସହିତ ହସ୍ତତନ୍ତ ବମକେଇ ଶାଢୀ |' },
-      { id: 'od7', title: 'Habaspuri Saree', title_or: 'ହବାସପୁରୀ ଶାଢୀ', price: 140, category: 'Textiles', images: ['images/textile.jpg'], seller: 'Kalahandi Artisans', seller_or: 'କଳାହାଣ୍ଡି କାରିଗର', rating: 4.7, district: 'Kalahandi', description: 'Traditional Habaspuri handloom from Kalahandi district.', description_or: 'କଳାହାଣ୍ଡି ଜିଲ୍ଲାର ପାରମ୍ପରିକ ହବାସପୁରୀ ହାତତନ୍ତ |' },
-      { id: 'od8', title: 'Dhokra Tribal Casting', title_or: 'ଧୋକ୍ରା ଆଦିବାସୀ କଳା', price: 90, category: 'Sculpture', images: ['images/elephants.jpg'], seller: 'Mayurbhanj Tribal Art', seller_or: 'ମୟୂରଭଞ୍ଜ ଆଦିବାସୀ କଳା', rating: 4.8, district: 'Mayurbhanj', description: 'Lost-wax metal casting featuring tribal motifs.', description_or: 'ଆଦିବାସୀ ମୋଟିଫ୍ ବିଶିଷ୍ଟ ଲଷ୍ଟ-ୱାକ୍ସ ମେଟାଲ୍ କାଷ୍ଟିଂ |' },
-      { id: 'od9', title: 'Jagannath Wooden Idol', title_or: 'ଜଗନ୍ନାଥ ମୂର୍ତ୍ତି', price: 50, category: 'Sculpture', images: ['images/krishna.jpg'], seller: 'Puri Carvings', seller_or: 'ପୁରୀ କାରିଗର', rating: 5.0, district: 'Puri', description: 'Neem wood idol of Lord Jagannath.', description_or: 'ନିମ୍ବ କାଠର ଜଗନ୍ନାଥ ମୂର୍ତ୍ତି |' },
-      { id: 'od10', title: 'Bargarh Handloom', title_or: 'ବରଗଡ଼ ହାତତନ୍ତ', price: 110, category: 'Textiles', images: ['images/textile.jpg'], seller: 'Western Odisha Weavers', seller_or: 'ପଶ୍ଚିମ ଓଡ଼ିଶା ବୁଣାକାର', rating: 4.8, district: 'Bargarh', description: 'Traditional Bargarh handloom fabric.', description_or: 'ପାରମ୍ପରିକ ବରଗଡ଼ ହାଜତନ୍ତ କପଡା |' },
-      { id: 'od11', title: 'Sonepuri Saree', title_or: 'ସୋନପୁରୀ ଶାଢୀ', price: 320, category: 'Textiles', images: ['images/textile.jpg'], seller: 'Sonepur Looms', seller_or: 'ସୋନପୁର କାରିଗର', rating: 4.9, district: 'Sonepur', description: 'Exquisite Sonepuri Silk Saree.', description_or: 'ସୁନ୍ଦର ସୋନପୁରୀ ସିଲ୍କ ଶାଢୀ |' }
-    ];
-    filterHomeProducts('All');
-    renderProductsGrid(currentProducts, 'shop-grid');
+    currentProducts = [];
   }
+
+  // Always inject custom items to ensure they show up for the user
+  const customItems = [
+    { 
+      id: 'custom1', 
+      title: 'Watercolor Baby Portrait', 
+      price: 0, 
+      isCustom: true,
+      category: 'Painting', 
+      images: ['images/watercolor_baby_portrait.png'], 
+      seller: 'Custom Studio', 
+      rating: 5.0,
+      description: 'A beautiful hand-painted watercolor portrait of your loved ones.'
+    },
+    { 
+      id: 'custom2', 
+      title: 'Hand-Drawn Artistic Portrait', 
+      price: 0, 
+      isCustom: true,
+      category: 'Painting', 
+      images: ['images/baby_portrait.jpg'], 
+      seller: 'Heritage Studio', 
+      rating: 4.9,
+      description: 'Get your precious moments captured on canvas.'
+    },
+    { 
+      id: 'custom3', 
+      title: 'Original Custom Portrait', 
+      price: 0, 
+      isCustom: true,
+      category: 'Painting', 
+      images: ['images/artss.jpeg'], 
+      seller: 'Authentic Arts', 
+      rating: 5.0,
+      description: 'Original hand-painted portrait. Custom orders accepted.'
+    }
+  ];
+
+  // Prepend custom items
+  currentProducts = [...customItems, ...currentProducts];
+  
+  if (currentProducts.length === customItems.length) {
+    // If currentProducts only has custom items, it means fetch failed, add more mock data
+    currentProducts = [...currentProducts, 
+      { id: 'p1', title: 'Madhubani Art', price: 120, category: 'Painting', images: ['images/pattachitra.jpg'], seller: 'Artisan Ramesh', rating: 4.8 },
+      { id: 'p2', title: 'Warli Ancestral Canvas', price: 85, category: 'Painting', images: ['images/warli.jpg'], seller: 'Adivasi Collective', rating: 4.9 },
+      { id: 'p3', title: 'Pichwai Cow Artwork', price: 150, category: 'Painting', images: ['images/pattachitra.jpg'], seller: 'Rajput Creations', rating: 4.7 },
+      { id: 'od2', title: 'Pattachitra Painting', title_or: 'ପଟ୍ଟଚିତ୍ର ଚିତ୍ରକଳା', price: 180, category: 'Painting', images: ['images/pattachitra.jpg'], seller: 'Raghurajpur Artisans', rating: 4.9 },
+      { id: 'od3', title: 'Pipli Applique Lamp', title_or: 'ପିପିଲି ଚାନ୍ଦୁଆ ଲ୍ୟାମ୍ପ', price: 65, category: 'Home Decor', images: ['images/pipli_applique.jpg'], seller: 'Pipli Craft House', rating: 4.7 },
+      { id: 'od5', title: 'Silver Filigree Box', title_or: 'କଟକ ରୂପା ତାରକସି ବାକ୍ସ', price: 220, category: 'Jewelry', images: ['images/silver_filigree.jpg'], seller: 'Cuttack Guild', rating: 5.0 },
+      { id: 'od9', title: 'Jagannath Wooden Idol', title_or: 'ଜଗନ୍ନାଥ ମୂର୍ତ୍ତି', price: 50, category: 'Sculpture', images: ['images/jagannath.jpg'], seller: 'Puri Carvings', rating: 5.0 }
+    ];
+  }
+
+  filterHomeProducts('All');
+  renderProductsGrid(currentProducts, 'shop-grid');
+  filterHomeProducts('All');
+  renderProductsGrid(currentProducts, 'shop-grid');
 }
+
+// Global static data as fallback
+const fallbackProducts = [
+  { id: 'od1', title: 'Sambalpuri Silk Saree', title_or: 'ସମ୍ବଲପୁରୀ ସିଲ୍କ ଶାଢୀ', price: 350, category: 'Textiles', images: ['images/sambalpuri_saree.png'], seller: 'Sambalpur Weavers Co-op', rating: 5.0, district: 'Sambalpur', description: 'Authentic Sambalpuri Silk Saree with traditional Bandha (Ikat) work.' },
+  { id: 'od2', title: 'Pattachitra Painting', title_or: 'ପଟ୍ଟଚିତ୍ର ଚିତ୍ରକଳା', price: 180, category: 'Painting', images: ['images/pattachitra.jpg'], seller: 'Raghurajpur Artisans', rating: 4.9, district: 'Puri', description: 'Traditional cloth-based scroll painting from Odisha.' },
+  { id: 'od3', title: 'Pipli Applique Lamp', title_or: 'ପିପିଲି ଚାନ୍ଦୁଆ ଲ୍ୟାମ୍ପ', price: 65, category: 'Home Decor', images: ['images/pipli_applique.jpg'], seller: 'Pipli Craft House', rating: 4.7, district: 'Puri', description: 'Vibrant applique work from Pipli.' },
+  { id: 'od4', title: 'Koraput Arabica Coffee', title_or: 'କୋରାପୁଟ ଆରାବିକା କଫି', price: 15, category: 'Tribal Art/Goods', images: ['images/koraput_coffee.jpg'], seller: 'Koraput Farmers', rating: 4.8, district: 'Koraput', description: 'Pure organic Arabica coffee.' },
+  { id: 'od5', title: 'Silver Filigree Box', title_or: 'କଟକ ରୂପା ତାରକସି ବାକ୍ସ', price: 220, category: 'Jewelry', images: ['images/silver_filigree.jpg'], seller: 'Cuttack Guild', rating: 5.0, district: 'Cuttack', description: 'Exquisite silver wire craft (Tarakasi) from Cuttack.' },
+  { id: 'od8', title: 'Dhokra Tribal Casting', title_or: 'ଧୋକ୍ରା ଆଦିବାସୀ କଳା', price: 90, category: 'Sculpture', images: ['images/elephants.jpg'], seller: 'Mayurbhanj Tribal Art', rating: 4.8, district: 'Mayurbhanj', description: 'Lost-wax metal casting featuring tribal motifs.' },
+  { id: 'od9', title: 'Jagannath Wooden Idol', title_or: 'ଜଗନ୍ନାଥ ମୂର୍ତ୍ତି', price: 50, category: 'Sculpture', images: ['images/jagannath.jpg'], seller: 'Puri Carvings', rating: 5.0, district: 'Puri', description: 'Neem wood idol of Lord Jagannath.' }
+];
 
 // Homepage Filtering Logic
 function filterHomeProducts(category) {
@@ -626,8 +610,9 @@ function openProductDetail(productId) {
   if(!product) return;
   
   const lang = localStorage.getItem('app-lang') || 'en';
-  document.getElementById('detail-title').innerText = (lang === 'or' && product.title_or) ? product.title_or : product.title;
-  document.getElementById('detail-price').innerText = `₹${product.price.toFixed(2)}`;
+  const displayTitle = (lang === 'or' && product.title_or) ? product.title_or : product.title;
+  document.getElementById('detail-title').innerText = displayTitle;
+  document.getElementById('detail-price').innerText = product.isCustom ? (lang === 'or' ? "ମୂଲ୍ୟ ପାଇଁ ଯୋଗାଯୋଗ କରନ୍ତୁ" : "Contact for Price") : `₹${product.price.toFixed(2)}`;
   
   const sellerElem = document.getElementById('detail-seller');
   sellerElem.innerText = (lang === 'or' && product.seller_or) ? product.seller_or : (product.seller || 'Unknown Artisan');
@@ -638,9 +623,19 @@ function openProductDetail(productId) {
   document.getElementById('detail-desc').innerText = (lang === 'or' && product.description_or) ? product.description_or : (product.description || 'An authentically handcrafted piece showcasing the rich cultural heritage of Indian arts. Made with passion and traditional techniques past down generations.');
   
   const addBtn = document.getElementById('add-to-cart-btn');
-  addBtn.onclick = () => { addToCart(null, product.id); };
+  if (product.isCustom) {
+    addBtn.innerHTML = `<i class="fa-solid fa-envelope"></i> ${lang === 'or' ? "କାରିଗରଙ୍କ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ" : "Contact Artisan"}`;
+    addBtn.onclick = () => { contactArtisan(displayTitle); };
+  } else {
+    addBtn.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> ${lang === 'or' ? "କାର୍ଟରେ ଯୋଡନ୍ତୁ" : "Add to Cart"}`;
+    addBtn.onclick = () => { addToCart(null, product.id); };
+  }
+
   const wishlistBtn = document.getElementById('add-to-wishlist-btn');
-  if (wishlistBtn) wishlistBtn.onclick = () => { addToWishlist(product.id); };
+  if (wishlistBtn) {
+    wishlistBtn.style.display = product.isCustom ? 'none' : 'inline-block';
+    wishlistBtn.onclick = () => { addToWishlist(product.id); };
+  }
 
   // Setup Visuals
   const imgElem = document.getElementById('detail-image');
@@ -892,6 +887,33 @@ function toggleHelpChat() {
   chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
 }
 
+function contactArtisan(productTitle) {
+  // Open Chat
+  const chat = document.getElementById('help-chat-modal');
+  chat.style.display = 'flex';
+
+  // Clear previous auto-messages if needed or just append
+  const msgCont = document.getElementById('help-chat-messages');
+  
+  // Add User Message
+  const lang = localStorage.getItem('app-lang') || 'en';
+  const userMsg = lang === 'or' 
+    ? `ନମସ୍କାର, ମୁଁ "${productTitle}" ପାଇଁ ଅର୍ଡର କରିବାକୁ ଚାହୁଁଛି | ଏହାର ମୂଲ୍ୟ କେତେ?`
+    : `Hi, I am interested in ordering "${productTitle}". What is the price and how can I proceed?`;
+  
+  msgCont.innerHTML += `<div class="msg user"><b>You:</b> ${userMsg}</div>`;
+  
+  // Add Bot/Artisan Reply
+  setTimeout(() => {
+    const reply = lang === 'or'
+      ? `ଧନ୍ୟବାଦ! "${productTitle}" ଏକ କଷ୍ଟମ ଆର୍ଟୱର୍କ | ଆମର କାରିଗର ଆପଣଙ୍କ ସହିତ ଶୀଘ୍ର ଯୋଗାଯୋଗ କରିବେ | ଦୟାକରି ଆପଣଙ୍କର ଫଟୋ ଏଠାରେ ସେୟାର କରନ୍ତୁ |`
+      : `Thank you for your interest! "${productTitle}" is a custom-made artwork. Our master artisan will contact you shortly to discuss details. Please share your reference photo here.`;
+    
+    msgCont.innerHTML += `<div class="msg bot"><b>Crafty:</b> ${reply}</div>`;
+    msgCont.scrollTop = msgCont.scrollHeight;
+  }, 800);
+}
+
 function sendHelpMsg() {
   const input = document.getElementById('help-msg-input');
   const text = input.value.trim();
@@ -904,14 +926,33 @@ function sendHelpMsg() {
   // AI Reply Simulation
   setTimeout(() => {
     const lang = localStorage.getItem('app-lang') || 'en';
-    let reply = lang === 'or' 
-      ? "ନମସ୍କାର! ମୁଁ କ୍ରାଫ୍ଟି, ଆପଣଙ୍କ ଓଡ଼ିଶା ଐତିହ୍ୟ ସହାୟକ | ମୁଁ ଆପଣଙ୍କୁ କିପରି ସାହାଯ୍ୟ କରିପାରିବି?" 
-      : "Hello! I am Crafty, your Odia Heritage Assistant. How can I help you today?";
-    
-    if(text.toLowerCase().includes('order')) {
-        reply = lang === 'or' 
-          ? "ମୁଁ ଆପଣଙ୍କ ଅର୍ଡର ସ୍ଥିତି 'ମୋର ଅର୍ଡର' ବିଭାଗରେ ଦେଖିପାରୁଛି |" 
-          : "I can see your order status in the 'My Orders' section.";
+    const lowerText = text.toLowerCase();
+    let reply = "";
+
+    // 1. Check for phone numbers
+    const phoneRegex = /(\+?\d{10,12})/;
+    if (phoneRegex.test(text)) {
+      reply = lang === 'or'
+        ? `ଧନ୍ୟବାଦ! ମୁଁ ଆପଣଙ୍କ ନମ୍ବର (${text.match(phoneRegex)[0]}) ପାଇଲି | ଆମର କାରିଗର ଖୁବ ଶୀଘ୍ର ଆପଣଙ୍କୁ କଲ୍ କରିବେ |`
+        : `Got it! I've saved your contact number (${text.match(phoneRegex)[0]}). Our artisan will call you shortly to finalize your order.`;
+    } 
+    // 2. Check for "order" or "price" or "custom"
+    else if (lowerText.includes('order') || lowerText.includes('price') || lowerText.includes('custom') || lowerText.includes('portrait')) {
+      reply = lang === 'or'
+        ? "ନିଶ୍ଚିତ! କଷ୍ଟମ୍ ପୋର୍ଟ୍ରେଟ୍ ପାଇଁ ଆମେ ଆପଣଙ୍କର ଫଟୋ ଆବଶ୍ୟକ କରୁ | ଦୟାକରି ଏଠାରେ ଏକ ଫଟୋ ଅପଲୋଡ୍ କରନ୍ତୁ କିମ୍ବା ଆପଣଙ୍କର ବିବରଣୀ ଦିଅନ୍ତୁ |"
+        : "Of course! For custom portraits, we'll need your reference photo. You can upload it here or share your requirements, and I'll notify the artist.";
+    }
+    // 3. Check for greetings
+    else if (lowerText.includes('hi') || lowerText.includes('hello') || lowerText.includes('namaskar')) {
+      reply = lang === 'or'
+        ? "ନମସ୍କାର! ମୁଁ କ୍ରାଫ୍ଟି, ଆପଣଙ୍କ ଓଡ଼ିଶା ଐତିହ୍ୟ ସହାୟକ | ମୁଁ ଆପଣଙ୍କୁ କିପରି ସାହାଯ୍ୟ କରିପାରିବି?"
+        : "Namaskar! I am Crafty, your Odisha Heritage Assistant. How can I help you support local artisans today?";
+    }
+    // 4. Default
+    else {
+      reply = lang === 'or'
+        ? "ମୁଁ ବୁଝିପାରୁଛି | ଦୟାକରି ମୋତେ ଅଧିକ ବିବରଣୀ ଦିଅନ୍ତୁ ଯେପରି ମୁଁ ଆପଣଙ୍କୁ ସାହାଯ୍ୟ କରିପାରିବି |"
+        : "I understand. Please give me more details so I can better assist you with your request.";
     }
     
     msgCont.innerHTML += `<div class="msg bot"><b>Crafty:</b> ${reply}</div>`;

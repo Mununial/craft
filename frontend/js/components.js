@@ -13,21 +13,25 @@ function getProductComponent(product) {
     <div class="product-card">
       <div class="img-wrapper">
         <img src="${imageUrl}" alt="${displayTitle}">
+        ${product.isCustom ? '<span class="badge-custom">Custom Art</span>' : ''}
       </div>
       <div class="product-info">
         <h3>${displayTitle}</h3>
         <p>${byText} <strong onclick="event.stopPropagation(); openSellerProfile('${product.seller || 'Artisan Ramesh'}')" style="cursor:pointer; color:var(--primary-color);">${displaySeller}</strong></p>
         
         <div class="price-row">
-          <span class="price">₹${parseFloat(product.price).toFixed(2)}</span>
+          <span class="price">${product.isCustom ? 'Contact for Price' : '₹' + parseFloat(product.price).toFixed(2)}</span>
           <span style="color:var(--secondary-color);"><i class="fa-solid fa-star"></i> ${product.rating || '4.5'}</span>
         </div>
         
         <div class="card-actions">
           <button class="btn-primary full-width" onclick="openProductDetail('${product.id}')">${viewText}</button>
           <div style="display:flex; gap:5px; width:100%;">
-            <button class="btn-secondary" style="flex:1" onclick="addToWishlist('${product.id}')"><i class="fa-solid fa-heart"></i></button>
-            <button class="btn-primary" style="flex:1" onclick="addToCart(event, '${product.id}')"><i class="fa-solid fa-cart-shopping"></i></button>
+            ${product.isCustom ? 
+              `<button class="btn-secondary full-width" style="display:flex; align-items:center; justify-content:center; gap:8px;" onclick="event.stopPropagation(); contactArtisan('${displayTitle.replace(/'/g, "\\'")}');"><i class="fa-solid fa-envelope"></i> Contact Artisan</button>` :
+              `<button class="btn-secondary" style="flex:1" onclick="addToWishlist('${product.id}')"><i class="fa-solid fa-heart"></i></button>
+               <button class="btn-primary" style="flex:1" onclick="addToCart(event, '${product.id}')"><i class="fa-solid fa-cart-shopping"></i></button>`
+            }
           </div>
         </div>
       </div>
